@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --blue: #376194;
+  --blue-deep: #1d3552;
+  --paper: #fbfaf7;
+  --ink: #14202e;
+  --ink-soft: #4a5668;
+  --tape: #f5b83d;
+  --tape-dark: #e5a420;
+  --error: #b42318;
+}
+
+.home-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  box-sizing: border-box;
+
+  padding: 40px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--blue);
+
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  color: var(--ink);
+}
+
+/* =========================
+   ETIQUETA
+========================= */
+
+.label {
+  width: 100%;
+  max-width: 560px;
+
+  background: var(--paper);
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow: 0 24px 48px rgba(10, 25, 45, 0.35);
+}
+
+.label-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 28px 40px;
+
+  border-bottom: 2px solid var(--ink);
+}
+
+.label-logo {
+  height: 130px;
+  width: auto;
+  object-fit: contain;
+}
+
+.label-service {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--blue);
+  text-align: center;
+}
+
+.label-body {
+  padding: 42px 48px 40px;
+}
+
+.label-body h1 {
+  margin: 0;
+
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+
+  color: var(--blue-deep);
+}
+
+.label-lead {
+  margin: 14px 0 32px;
+  max-width: 38ch;
+
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.label-body label {
+  display: block;
+  margin-bottom: 9px;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.label-body input {
+  width: 100%;
+  height: 62px;
+  box-sizing: border-box;
+  padding: 0 18px;
+
+  border: 2px solid var(--ink);
+  border-radius: 7px;
+  background: #fff;
+
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+
+  outline: none;
+}
+
+.label-body input::placeholder {
+  color: #8b95a3;
+  font-weight: 400;
+}
+
+.label-body input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(55, 97, 148, 0.22);
+}
+
+.label-body input[aria-invalid='true'] {
+  border-color: var(--error);
+  box-shadow: 0 0 0 4px rgba(180, 35, 24, 0.14);
+}
+
+.label-error {
+  margin: 8px 0 0;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--error);
+}
+
+.label-body button {
+  width: 100%;
+  height: 58px;
+  margin-top: 16px;
+
+  border: 2px solid var(--ink);
+  border-radius: 7px;
+
+  background: var(--tape);
+  color: var(--ink);
+
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.label-body button:hover {
+  background: var(--tape-dark);
+}
+
+.label-body button:active {
+  transform: translateY(1px);
+}
+
+.label-body button:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* =========================
+   PERFORACIÓN + TALÓN
+========================= */
+
+.label-tear {
+  position: relative;
+  height: 0;
+
+  border-top: 2px dashed #b9c0ca;
+}
+
+.label-tear::before,
+.label-tear::after {
+  content: '';
+
+  position: absolute;
+  top: -13px;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+
+  background: var(--blue);
+}
+
+.label-tear::before {
+  left: -12px;
+}
+
+.label-tear::after {
+  right: -12px;
+}
+
+.label-stub {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  padding: 24px 48px 30px;
+}
+
+.label-stub p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.label-barcode {
+  height: 42px;
+
+  opacity: 0.85;
+
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0 2px,
+    transparent 2px 4px,
+    var(--ink) 4px 5px,
+    transparent 5px 8px,
+    var(--ink) 8px 11px,
+    transparent 11px 13px,
+    var(--ink) 13px 14px,
+    transparent 14px 17px,
+    var(--ink) 17px 19px,
+    transparent 19px 21px
+  );
+}
+
+/* =========================
+   PANTALLAS GRANDES
+========================= */
+
+@media (min-width: 1000px) {
+  .home-page {
+    padding: 40px;
+  }
+
+  .label {
+    max-width: 620px;
+  }
+
+  .label-head {
+    padding: 32px 48px;
+  }
+
+  .label-logo {
+    height: 180px;
+  }
+
+  .label-body {
+    padding: 48px 56px 46px;
+  }
+
+  .label-body h1 {
+    font-size: 50px;
+  }
+
+  .label-lead {
+    font-size: 18px;
+  }
+
+  .label-stub {
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .home-page {
+    padding: 20px 12px;
+  }
+
+  .label {
+    max-width: 420px;
+  }
+
+  .label-head,
+  .label-body,
+  .label-stub {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .label-head {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .label-logo {
+    height: 95px;
+  }
+
+  .label-body {
+    padding-top: 32px;
+    padding-bottom: 30px;
+  }
+
+  .label-body h1 {
+    font-size: 32px;
+  }
+
+  .label-body input {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  .label-body h1 {
+    font-size: 29px;
+  }
+
+  .label-body {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .label-stub {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .label-body button {
+    transition: none;
+  }
+}
