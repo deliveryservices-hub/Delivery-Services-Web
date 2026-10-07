@@ -12,6 +12,12 @@ import {
   TileLayer,
 } from 'react-leaflet';
 
+import L from 'leaflet';
+
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
 type Delivery = {
   id: string;
   claim_number: string;
@@ -603,18 +609,46 @@ function Tracking() {
   }
 
   const addMinutesToTime = (time: string, minutes: number) => {
-    const [hours, mins] = time.split(':').map(Number);
+    const match = time
+      .trim()
+      .match(/^(\d{1,2}):(\d{2})\s*(a\.?\s*m\.?|p\.?\s*m\.?)$/i);
+
+    if (!match) {
+      return time;
+    }
+
+    let hours = Number(match[1]);
+    const mins = Number(match[2]);
+    const period = match[3].toLowerCase().replace(/\s/g, '');
+
+    if (period.startsWith('p') && hours !== 12) {
+      hours += 12;
+    }
+
+    if (period.startsWith('a') && hours === 12) {
+      hours = 0;
+    }
 
     const date = new Date();
     date.setHours(hours, mins, 0, 0);
     date.setMinutes(date.getMinutes() + minutes);
 
     return date.toLocaleTimeString('es-AR', {
-      hour: '2-digit',
+      hour: 'numeric',
       minute: '2-digit',
-      hour12: false,
+      hour12: true,
     });
   };
+
+  const vehicleIcon = L.icon({
+    iconUrl: markerIcon,
+    iconRetinaUrl: markerIcon2x,
+    shadowUrl: markerShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
 
   return (
     <main className="tracking-page">
@@ -936,6 +970,7 @@ function Tracking() {
                     location.latitude,
                     location.longitude,
                   ]}
+                  icon={vehicleIcon}
                 >
                   <Popup>
                     El vehículo se encuentra
