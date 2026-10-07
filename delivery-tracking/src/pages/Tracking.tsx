@@ -602,6 +602,20 @@ function Tracking() {
     });
   }
 
+  const addMinutesToTime = (time: string, minutes: number) => {
+    const [hours, mins] = time.split(':').map(Number);
+
+    const date = new Date();
+    date.setHours(hours, mins, 0, 0);
+    date.setMinutes(date.getMinutes() + minutes);
+
+    return date.toLocaleTimeString('es-AR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+  };
+
   return (
     <main className="tracking-page">
       <div className="tracking-container">
@@ -683,9 +697,7 @@ function Tracking() {
                     </span>
 
                     <strong>
-                      {eta.start}
-                      {eta.end &&
-                        ` — ${eta.end}`}
+                      {eta.start} — {addMinutesToTime(eta.start, 15)}
                     </strong>
                   </div>
 
@@ -695,7 +707,7 @@ function Tracking() {
                 </div>
             )}
 
-            {isRouteInProgress && !isFinished && (
+            {isToday && !isFinished && (
               <button
                 type="button"
                 className="tracking-refresh-button"
