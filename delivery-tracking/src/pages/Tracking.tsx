@@ -10,6 +10,7 @@ import {
   Marker,
   Popup,
   TileLayer,
+  useMap,
 } from 'react-leaflet';
 
 import L from 'leaflet';
@@ -46,6 +47,20 @@ type LocationData = {
   accuracy: number | null;
   recorded_at: string;
 };
+
+function RecenterMap({ location }: { location: LocationData }) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.flyTo(
+      [location.latitude, location.longitude],
+      map.getZoom(),
+      { animate: true, duration: 1 }
+    );
+  }, [location.latitude, location.longitude, map]);
+
+  return null;
+}
 
 function Tracking() {
   const { claimNumber } = useParams();
@@ -960,6 +975,9 @@ function Tracking() {
                   width: '100%',
                 }}
               >
+
+                <RecenterMap location={location} />
+
                 <TileLayer
                   attribution="&copy; OpenStreetMap contributors"
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
